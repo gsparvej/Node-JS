@@ -17,12 +17,30 @@ const userRoutes = require('./routes/user');
 app.use('/api/users', userRoutes);
 
 
+// item
+app.use("/api/items", require("./routes/itemRoutes"));
+
+
+
+// vendor
+app.use("/api/vendor" , require("./routes/vendorRoutes"));
+
+// purchase order
+app.use("/api/po", require("./routes/purchaseRoutes"));
+
+
+
+
+
+
 
 
 
 app.get('/' , (req, res) =>{
     res.send('<p> Welcome my Page</p>');
 })
+
+
 
 
 
