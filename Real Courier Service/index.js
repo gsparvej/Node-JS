@@ -29,6 +29,21 @@ app.use("/api/vendor" , require("./routes/vendorRoutes"));
 app.use("/api/po", require("./routes/purchaseRoutes"));
 
 
+//BomStyle
+app.use("/api/bomStyle", require("./routes/bomStyleRoutes"));
+
+
+//BOM
+app.use("/api/bom" , require("./routes/bomRoutes"));
+
+
+//UOM
+app.use("/api/uom", require("./routes/uomRoutes"));
+
+
+
+
+
 
 
 
