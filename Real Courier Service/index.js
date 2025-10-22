@@ -41,6 +41,10 @@ app.use("/api/bom" , require("./routes/bomRoutes"));
 app.use("/api/uom", require("./routes/uomRoutes"));
 
 
+//Buyer
+app.use("/api/buyer", require("./routes/buyerRoutes"));
+
+
 
 
 
