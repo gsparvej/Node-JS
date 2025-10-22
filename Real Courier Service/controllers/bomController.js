@@ -14,6 +14,7 @@ exports.saveBOM = (req, res) => {
         if (err)
             return res.status(500).send(err);
         res.send({ message: 'BOM Saved Succesfully !', id: result.insertId });
-    })
+    });
 
-}
+};
+
