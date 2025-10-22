@@ -4,14 +4,13 @@ const db = require("../db");
 exports.saveUOM = (req, res) => {
     const { productName, size, body, sleeve, pocket, wastage, shrinkage } = req.body;
 
-    // Convert to numbers in case frontend sends strings
+    
     const bodyNum = parseFloat(body);
     const sleeveNum = parseFloat(sleeve);
     const pocketNum = parseFloat(pocket);
     const wastageNum = parseFloat(wastage);
     const shrinkageNum = parseFloat(shrinkage);
 
-    // Recalculate baseFabric on backend
     const base = bodyNum + sleeveNum + pocketNum;
     const baseFabric = base + (base * ((wastageNum + shrinkageNum) / 100));
 
