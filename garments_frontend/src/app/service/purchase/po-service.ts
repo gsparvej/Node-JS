@@ -22,5 +22,10 @@ export class PoService {
         
   return this.http.post(this.baseUrl+"/api/po/",po);
   }
+
+
+   viewPODetails(id: number): Observable<any> {
+    return this.http.get(this.baseUrl+'/api/po/'+id);
+  }
   
 }

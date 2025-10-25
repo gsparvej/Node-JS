@@ -7,9 +7,13 @@ export interface PurchaseModel {
   item: {
     id: number;
     category_name?: string;
+    unit?: string;
   };
   vendor: {
     id: number;
     comapny_name?: string;
+    contact_person?: string;
+    phone?: string;
+    address?: string;
   };
 }
