@@ -13,16 +13,43 @@ exports.createPurchaseOrder = (req, res)=>{
     });
 };
 
-exports.getAllPurchaseOrder = (req, res) =>{
-    db.query(
-        `SELECT p.* , i.category_name AS items, v.comapny_name AS vendors
-        FROM po p
-        JOIN items i ON p.item_id = i.id
-        JOIN vendors v ON p.vendor_id = v.id`,
-        (err , result) => {
-            if(err)
-                return res.status(500).json({error: err.message});
-            res.json(result);
-        }
-    );
+exports.getAllPurchaseOrder = (req, res) => {
+  const sql = `
+    SELECT 
+      p.id,
+      p.po_number,
+      p.quantity,
+      p.rate,
+      p.total,
+      p.item_id,
+      p.vendor_id,
+      i.category_name AS items,
+      v.comapny_name AS vendors
+    FROM po p
+    JOIN items i ON p.item_id = i.id
+    JOIN vendors v ON p.vendor_id = v.id
+  `;
+
+  db.query(sql, (err, result) => {
+    if (err) return res.status(500).json({ error: err.message });
+
+    // ✅ Transform flat rows into nested objects
+    const formatted = result.map((row) => ({
+      id: row.id,
+      po_number: row.po_number,
+      quantity: row.quantity,
+      rate: row.rate,
+      total: row.total,
+      item: {
+        id: row.item_id,
+        category_name: row.items
+      },
+      vendor: {
+        id: row.vendor_id,
+        comapny_name: row.vendors
+      }
+    }));
+
+    res.json(formatted);
+  });
 };
