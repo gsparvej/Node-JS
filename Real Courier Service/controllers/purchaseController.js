@@ -17,7 +17,7 @@ exports.createPurchaseOrder = (req, res) => {
     vendor
   } = req.body;
 
-  // ✅ Extract nested IDs correctly
+  // Extract nested IDs correctly
   const item_id = item?.id || null;
   const vendor_id = vendor?.id || null;
 
@@ -25,7 +25,7 @@ exports.createPurchaseOrder = (req, res) => {
     return res.status(400).json({ message: 'Missing item_id or vendor_id' });
   }
 
-  // ✅ Proper SQL query
+  // Proper SQL query
   const sql = `
     INSERT INTO po(
       po_number, poDate, deliveryDate, quantity, rate,
@@ -35,7 +35,7 @@ exports.createPurchaseOrder = (req, res) => {
     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
   `;
 
-  // ✅ Correct value order
+  // Correct value order
   const values = [
     po_number,
     poDate,
