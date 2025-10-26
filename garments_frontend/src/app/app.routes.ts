@@ -5,12 +5,16 @@ import { VendorComponent } from './component/purchase/vendor-component/vendor-co
 import { ViewVendor } from './component/purchase/view-vendor/view-vendor';
 import { ViewHalfPO } from './component/purchase/view-half-po/view-half-po';
 import { ViewPODetails } from './component/purchase/view-podetails/view-podetails';
+import { Home } from './home/home';
+import { CreatePO } from './component/purchase/create-po/create-po';
 
 export const routes: Routes = [
-    {path: '', component: ItemComponent},
+    {path: '', component:Home},
+    {path: 'addItem', component: ItemComponent},
     {path: 'viewItem', component: ViewItemcomponent},
     {path: 'addVendor' , component: VendorComponent},
     {path: 'viewAllVendor' , component: ViewVendor},
     {path: 'viewPO', component: ViewHalfPO},
-    {path: 'viewPODetails/:id' , component: ViewPODetails}
+    {path: 'viewPODetails/:id' , component: ViewPODetails},
+    {path: 'createPO', component: CreatePO}
 ];

@@ -1,17 +1,65 @@
 const db = require("../db");
 
 
+exports.createPurchaseOrder = (req, res) => {
+  const {
+    po_number,
+    poDate,
+    deliveryDate,
+    quantity,
+    rate,
+    subTotal,
+    discount,
+    tax,
+    total,
+    termsAndCondition,
+    item,
+    vendor
+  } = req.body;
 
-exports.createPurchaseOrder = (req, res)=>{
-     const{ po_number, quantity, rate, total, item_id, vendor_id} = req.body;
-  
-    const sql = 'insert into po(po_number, quantity, rate, total, item_id, vendor_id) values(?,?,?,?,?,?)';
-    db.query(sql, [po_number, quantity, rate, total, item_id, vendor_id], (err, result) => {
-         if(err) 
-            return res.status(500).send(err);
-        res.send({message: 'Purchase Order Created Succesfully!', id: result.insertId});
-    });
+  // ✅ Extract nested IDs correctly
+  const item_id = item?.id || null;
+  const vendor_id = vendor?.id || null;
+
+  if (!item_id || !vendor_id) {
+    return res.status(400).json({ message: 'Missing item_id or vendor_id' });
+  }
+
+  // ✅ Proper SQL query
+  const sql = `
+    INSERT INTO po(
+      po_number, poDate, deliveryDate, quantity, rate,
+      subTotal, discount, tax, total, termsAndCondition,
+      item_id, vendor_id
+    )
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+  `;
+
+  // ✅ Correct value order
+  const values = [
+    po_number,
+    poDate,
+    deliveryDate,
+    quantity,
+    rate,
+    subTotal,
+    discount,
+    tax,
+    total,
+    termsAndCondition,
+    item_id,
+    vendor_id
+  ];
+
+  db.query(sql, values, (err, result) => {
+    if (err) {
+      console.error('SQL error:', err);
+      return res.status(500).send(err);
+    }
+    res.send({ message: 'Purchase Order Created Successfully!', id: result.insertId });
+  });
 };
+
 
 exports.getAllPurchaseOrder = (req, res) => {
   const sql = `
@@ -64,6 +112,12 @@ exports.getPOById = (req, res) => {
       p.quantity,
       p.rate,
       p.total,
+      p.poDate,
+      p.deliveryDate,
+      p.subTotal,
+      p.discount,
+      p.tax,
+      p.termsAndCondition,
       p.item_id,
       p.vendor_id,
       i.category_name AS items,
@@ -92,6 +146,14 @@ exports.getPOById = (req, res) => {
       quantity: row.quantity,
       rate: row.rate,
       total: row.total,
+      subTotal: row.subTotal,
+      discount: row.discount,
+      tax: row.tax,
+      termsAndCondition: row.termsAndCondition,
+      poDate: row.poDate,
+      deliveryDate: row.deliveryDate,
+
+
       item: {
         id: row.item_id,
         category_name: row.items,

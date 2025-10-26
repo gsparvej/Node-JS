@@ -1,8 +1,13 @@
 export interface PurchaseModel {
   id: number;
   po_number: string;
+  poDate: Date;
+  tax: number;
+  deliveryDate: Date;
+  termsAndCondition: string;
   quantity: number;
   rate: number;
+  subTotal: number;
   total: number;
   item: {
     id: number;

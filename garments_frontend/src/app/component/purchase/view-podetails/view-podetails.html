@@ -21,14 +21,14 @@
       <label class="form-label fw-semibold">PO Number</label>
       <div class="text-secondary border-bottom pb-1">{{ po.po_number }}</div>
     </div>
-    <!-- <div class="col-md-4 mb-2">
+    <div class="col-md-4 mb-2">
       <label class="form-label fw-semibold">PO Date</label>
       <div class="text-secondary border-bottom pb-1">{{ po.poDate | date: 'dd MMMM, yyyy' }}</div>
-    </div> -->
-    <!-- <div class="col-md-4 mb-2">
+    </div>
+    <div class="col-md-4 mb-2">
       <label class="form-label fw-semibold">Delivery Date</label>
       <div class="text-secondary border-bottom pb-1">{{ po.deliveryDate | date: 'dd MMMM, yyyy' }}</div>
-    </div> -->
+    </div>
   </div>
 
   <!-- Vendor Info -->
@@ -61,7 +61,7 @@
           <th>SL</th>
            <th>Product Name</th>
           <th>Quantity</th>
-         
+          <th>TAX %</th>
           <th>Total Price</th>
         </tr>
       </thead>
@@ -71,7 +71,7 @@
            <td>{{ po.item.category_name }}</td>
 
           <td>{{ po.quantity| number:'1.2-2'}}  ({{po.item.unit}})</td>
-         
+          <td>{{ po.tax }}</td>
           <td>{{ po.total | number:'1.2-2' }}</td>
           <!-- <td>{{ item.unitPrice | number:'1.2-2' }} BDT</td>
           <td>{{ item.totalPrice | number:'1.2-2' }} BDT</td> -->
@@ -100,15 +100,12 @@
   <div class="mb-5">
     <h5 class="text-secondary fw-semibold">Terms & Conditions</h5>
     <ul class="text-secondary">
-      <li>All goods must be delivered by the specified date.</li>
-      <li>Payment will be made within 30 days of delivery & invoice receipt.</li>
-      <li>Defective items must be replaced within 7 working days.</li>
-      <li>The PO number must be mentioned on all delivery challans and invoices.</li>
+     <td>{{po.termsAndCondition}}</td>
     </ul>
   </div>
 
   <!-- Signature Section -->
-  <!-- <div class="row mt-5">
+  <div class="row mt-5">
     <div class="col-md-6">
       <p class="fw-semibold">Authorized By (Purchase):</p>
       <div class="border-bottom mb-2" style="height: 40px;"></div>
@@ -122,5 +119,6 @@
       <p class="mb-0"><strong>Admin Department</strong></p>
       <p class="mb-0">ABC Garments Ltd.</p>
       <p>Date: {{ po.poDate | date:'dd MMMM, yyyy' }}</p>
-    </div> -->
+    </div>
   </div>
+</div>
