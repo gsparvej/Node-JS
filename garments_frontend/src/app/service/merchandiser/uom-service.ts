@@ -1,30 +1,24 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../environment/environment';
 import { HttpClient } from '@angular/common/http';
+import { Uom } from '../../model/uom.model';
 import { Observable } from 'rxjs';
-import { Buyer } from '../../model/buyer.model';
 
 @Injectable({
   providedIn: 'root'
 })
-export class BuyerService {
+export class UomService {
   private baseUrl = environment.apiUrl;
 
   constructor(
     private http: HttpClient
   ) { }
 
-  saveBuyer(buyer: Buyer): Observable<Buyer> {
-    return this.http.post<Buyer>(this.baseUrl + "/api/buyer/", buyer);
+  saveUOM(uom: Uom): Observable<Uom> {
+    return this.http.post<Uom>(this.baseUrl + "/api/uom/", uom);
   }
 
-  getAllBuyer() : Observable<any> {
-    return this.http.get(this.baseUrl+"/api/buyer/");
+  getAllUOM(): Observable<any> {
+    return this.http.get(this.baseUrl + "/api/uom/");
   }
-
-
-
-
-
-
 }
