@@ -3,6 +3,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { UomService } from '../../../service/merchandiser/uom-service';
+import { Uom } from '../../../model/uom.model';
 
 @Component({
   selector: 'app-add-uom',
@@ -49,6 +50,45 @@ export class AddUOM implements OnInit {
   }
 
 
+  addUOM(): void {
+    this.totalConsumption();
+
+    const uom: Uom = {
+      ...this.formGroup.value,
+      result: this.baseFabric
+    };
+
+    this.uomService.saveUOM(uom).subscribe({
+      next: (uom) => {
+        console.log('UOM Added Succesfully!', uom);
+        this.formGroup.reset();
+        this.router.navigate(['/viewUom']);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+
+
+
+  }
+
+  
+  totalConsumption(): void {
+    this.body = this.formGroup.value.body;
+    this.sleeve = this.formGroup.value.sleeve;
+    this.pocket = this.formGroup.value.pocket;
+    this.wastage = this.formGroup.value.wastage;
+    this.shrinkage = this.formGroup.value.shrinkage;
+
+
+    this.baseFabric = (this.body + this.pocket + this.sleeve) +
+      ((this.body + this.pocket + this.sleeve) * ((this.wastage + this.shrinkage) / 100))
+  }
+
+  onFocusLost() {
+    this.totalConsumption();
+  }
 
 
 }
