@@ -1,1 +1,167 @@
-<p>create-order works!</p>
+<div class="container my-5">
+  <h2 class="text-center fw-bold mb-4">🧾 Create New Order</h2>
+
+  <div class="card shadow rounded-4 p-4">
+    <form [formGroup]="formGroup" (ngSubmit)="addOrder()">
+
+      <!-- Order Info -->
+      <div class="row g-4 mb-4">
+
+        <!-- Style Code -->
+        <div class="col-md-4" formGroupName="bomstyle">
+          <label class="form-label">Style Code</label>
+          <select class="form-select rounded-pill" formControlName="id">
+            <option *ngFor="let s of bomstyle" [ngValue]="s.id">{{ s.styleCode }}</option>
+          </select>
+        </div>
+
+        <!-- Order Status -->
+        <div class="col-md-4">
+          <label class="form-label">Order Status</label>
+          <select class="form-select rounded-pill" formControlName="orderStatus">
+            <option value="Pending">Pending</option>
+            <option value="Confirmed">Confirmed</option>
+          </select>
+        </div>
+
+        <!-- Buyer Name -->
+        <div class="col-md-4" formGroupName="buyer">
+          <label class="form-label">Buyer Name</label>
+          <select class="form-select rounded-pill" formControlName="id">
+            <option *ngFor="let b of buyer" [value]="b.id">{{ b.name }}</option>
+          </select>
+        </div>
+
+        <!-- Shipping Address -->
+        <div class="col-md-6">
+          <label class="form-label">Shipping Address</label>
+          <input type="text" class="form-control rounded-pill" [value]="selectedBuyerAddress" readonly>
+        </div>
+
+        <!-- Order Date -->
+        <div class="col-md-3">
+          <label class="form-label">Order Date</label>
+          <input type="date" class="form-control rounded-pill" formControlName="orderDate">
+        </div>
+
+        <!-- Delivery Date -->
+        <div class="col-md-3">
+          <label class="form-label">Delivery Date</label>
+          <input type="date" class="form-control rounded-pill" formControlName="deliveryDate">
+        </div>
+
+      </div>
+
+      <hr class="my-4">
+
+      <div class="row g-4">
+
+        <!-- Left Column: Order Calculation -->
+        <div class="col-md-8">
+          <div class="card p-4 shadow-sm rounded-4">
+            <h5 class="fw-semibold mb-3">Order Calculation</h5>
+
+            <!-- Short Sleeve Shirts -->
+            <h6 class="text-primary fw-semibold">👕 Short Sleeve Shirt</h6>
+            <div class="row g-3 mb-4">
+              <ng-container *ngFor="let size of ['Small','Medium','Large','XL']">
+                <div class="col-md-6">
+                  <label class="form-label">{{ size }} Size (Qty)</label>
+                  <input type="number" class="form-control rounded-pill"
+                         [formControlName]="'short' + size + 'Size'" placeholder="0">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">{{ size }} Size Price (Per Piece)</label>
+                  <input type="number" class="form-control rounded-pill"
+                         [formControlName]="'short' + size + 'Price'" placeholder="0.00">
+                </div>
+              </ng-container>
+            </div>
+
+            <hr>
+
+            <!-- Full Sleeve Shirts -->
+            <h6 class="text-primary fw-semibold mt-4">👔 Full Sleeve Shirt</h6>
+            <div class="row g-3 mb-4">
+              <ng-container *ngFor="let size of ['Small','Medium','Large','XL']">
+                <div class="col-md-6">
+                  <label class="form-label">{{ size }} Size (Qty)</label>
+                  <input type="number" class="form-control rounded-pill"
+                         [formControlName]="'full' + size + 'Size'" placeholder="0">
+                </div>
+                <div class="col-md-6">
+                  <label class="form-label">{{ size }} Size Price (Per Piece)</label>
+                  <input type="number" class="form-control rounded-pill"
+                         [formControlName]="'full' + size + 'Price'" placeholder="0.00">
+                </div>
+              </ng-container>
+
+              <!-- Remarks -->
+              <div class="col-12 mt-3">
+                <label class="form-label">Remarks</label>
+                <input type="text" class="form-control rounded-pill" formControlName="remarks"
+                       placeholder="Any remarks">
+              </div>
+
+              <!-- Calculate Button -->
+              <div class="col-12 text-center mt-4">
+                <button type="button" class="btn btn-outline-primary rounded-pill px-5"
+                        (click)="subTotalCalculation(); onFocusLost()">
+                  <i class="bi bi-calculator me-2"></i>Calculate
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right Column: Order Summary -->
+        <div class="col-md-4">
+          <div class="card p-4 shadow-sm rounded-4 bg-light border border-primary-subtle">
+            <h5 class="text-center fw-semibold mb-3">📊 Order Summary</h5>
+
+            <div class="mb-3">
+              <label class="form-label">Subtotal</label>
+              <input type="number" class="form-control rounded-pill"
+                     formControlName="subTotal" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">VAT (%)</label>
+              <input type="number" class="form-control rounded-pill"
+                     formControlName="vat" (blur)="onFocusLost()">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Paid Amount</label>
+              <input type="number" class="form-control rounded-pill"
+                     formControlName="paidAmount" (blur)="onFocusLost()">
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label">Due Amount</label>
+              <input type="number" class="form-control rounded-pill"
+                     formControlName="dueAmount" readonly>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold">Total</label>
+              <input type="number" class="form-control rounded-pill text-end fw-bold fs-5"
+                     formControlName="total" readonly>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="d-flex justify-content-between align-items-center mt-5">
+        <button type="submit" class="btn btn-success px-5 py-2 rounded-pill shadow-lg fw-bold">
+          <i class="bi bi-check-circle me-2"></i>Submit Order
+        </button>
+        <button type="button" class="btn btn-outline-secondary px-4 py-2 rounded-pill shadow-sm fw-semibold">
+          <i class="bi bi-printer me-2"></i>Print
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

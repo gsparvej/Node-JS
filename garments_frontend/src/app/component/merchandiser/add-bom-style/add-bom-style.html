@@ -1,0 +1,45 @@
+<div class="container my-5">
+    <div class="card shadow-lg border-0 rounded-4 p-4 bg-white">
+        <h2 class="text-center text-success fw-bold mb-4">Add BOM Style</h2>
+
+        <form [formGroup]="formGroup" method="post">
+            <div class="row g-4">
+
+                <!-- Style Code -->
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Style Code</label>
+                    <input type="text" class="form-control form-control-lg" id="styleCode" formControlName="styleCode"
+                        placeholder="Enter style code e.g. ABC123" />
+                </div>
+
+                <!-- Style Type -->
+                <div class="col-md-6">
+                    <label class="form-label fw-semibold">Style Type</label>
+                    <input type="text" class="form-control form-control-lg" id="styleType" formControlName="styleType"
+                        placeholder="e.g. Casual, Formal" />
+                </div>
+
+                <!-- Description -->
+                <div class="col-md-12">
+                    <label class="form-label fw-semibold">Description</label>
+                    <input type="text" class="form-control form-control-lg" id="description"
+                        formControlName="description" placeholder="Short description of the style" />
+                </div>
+            </div>
+
+            <!-- Buttons -->
+            <div class="row mt-5">
+                <div class="col-md-6 d-grid">
+                    <button type="submit" class="btn btn-success btn-lg" (click)="addBomStyle()">
+                        <i class="bi bi-check-circle me-2"></i> Save
+                    </button>
+                </div>
+                <div class="col-md-6 d-grid">
+                    <button type="reset" class="btn btn-outline-danger btn-lg">
+                        <i class="bi bi-arrow-counterclockwise me-2"></i> Reset
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

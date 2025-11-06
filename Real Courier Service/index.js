@@ -44,6 +44,11 @@ app.use("/api/uom", require("./routes/uomRoutes"));
 //Buyer
 app.use("/api/buyer", require("./routes/buyerRoutes"));
 
+// Order
+app.use("/api/order" , require("./routes/orderRoutes"));
+
+
+
 
 
 
