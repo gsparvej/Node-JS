@@ -104,11 +104,11 @@ export class CreateOrder implements OnInit {
       orderStatus: [''],
 
       bomstyle: this.formBuilder.group({
-        id: ['', Validators.required]
+        id: ['']
       }),
       buyer: this.formBuilder.group({
-        id: ['', Validators.required],
-        address: ['', Validators.required]
+        id: [''],
+        address: ['']
       })
     });
 

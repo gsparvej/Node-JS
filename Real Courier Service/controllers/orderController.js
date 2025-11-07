@@ -120,8 +120,8 @@ exports.getAllOrderList = (req, res) => {
     SELECT 
     o.id,
     o.deliveryDate,
-    bom.styleCode AS bomstyle,
-    b.name AS buyers
+    bom.styleCode AS styleCode,
+    b.name AS name
     FROM orders o
     JOIN bomstyle bom ON o.bomStyle_id = bom.id
     JOIN buyers b ON o.buyer_id = b.id
@@ -135,11 +135,11 @@ exports.getAllOrderList = (req, res) => {
             deliveryDate: row.deliveryDate,
             buyer: {
                 id: row.buyer_id,
-                name: row.buyers
+                name: row.name
             },
-            bomStyle: {
+            bomstyle: {
                 id: row.bomStyle_id,
-                styleCode: row.bomstyle
+                styleCode: row.styleCode
             }
 
         }));

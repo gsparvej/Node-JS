@@ -1,0 +1,19 @@
+.container {
+  max-width: 1000px;
+}
+
+h2 {
+  font-weight: 600;
+}
+
+.table th, .table td {
+  vertical-align: middle;
+}
+
+hr {
+  margin: 1.5rem 0;
+}
+
+button {
+  min-width: 120px;
+}
