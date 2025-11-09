@@ -16,6 +16,7 @@ import { AddBomStyle } from './component/merchandiser/add-bom-style/add-bom-styl
 import { ViewHalfOrder } from './component/merchandiser/view-half-order/view-half-order';
 import { ViewFullOrder } from './component/merchandiser/view-full-order/view-full-order';
 import { CreateOrder } from './component/merchandiser/create-order/create-order';
+import { AddBom } from './component/merchandiser/add-bom/add-bom';
 
 export const routes: Routes = [
     {path: '', component:Home},
@@ -34,5 +35,6 @@ export const routes: Routes = [
     {path: 'viewBomStyle' , component: ViewBomStyle},
     {path: 'createOrder', component: CreateOrder},
     {path: 'viewHalfOrder', component: ViewHalfOrder},
-    {path: 'fullOrderView/:id', component: ViewFullOrder}
+    {path: 'fullOrderView/:id', component: ViewFullOrder},
+    {path: 'addBom', component: AddBom}
 ];
