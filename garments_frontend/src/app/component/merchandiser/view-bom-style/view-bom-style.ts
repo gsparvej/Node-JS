@@ -31,5 +31,10 @@ export class ViewBomStyle implements OnInit {
   loadAllBomStyle() {
     this.bom = this.bomStyleService.getBomstyleList();
   }
+  
+   bomDetails(styleCode: string) {
+    // Navigate to BOM details page with styleCode as route param
+    this.router.navigate(['viewBom', styleCode]);
+  }
 
 }

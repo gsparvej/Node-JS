@@ -17,4 +17,56 @@ exports.saveBOM = (req, res) => {
     });
 
 };
+// controllers/bomController.js
+
+exports.getBOMByStyleCode = (req, res) => {
+    const { styleCode } = req.params;
+    console.log("🔍 Received styleCode:", styleCode);
+
+    const sql = `
+    SELECT 
+      p.material,
+      p.unit,
+      p.quantity,
+      p.unit_price,
+      p.total_cost,
+      p.serial,
+      p.bomStyle_id,
+      p.uom_id,
+      b.styleCode AS styleCode,
+      b.description AS description,
+      u.baseFabric AS baseFabric
+    FROM bom p
+    JOIN bomstyle b ON p.bomStyle_id = b.id
+    JOIN uom u ON p.uom_id = u.id
+    WHERE b.styleCode = ?
+  `;
+
+    db.query(sql, [styleCode], (err, result) => {
+        if (err) return res.status(500).json({ error: err.message });
+        if (result.length === 0)
+            return res.status(404).json({ message: "BOM not found" });
+
+        const formatted = result.map(row => ({
+            material: row.material,
+            unit: row.unit,
+            quantity: row.quantity,
+            unit_price: row.unit_price,
+            total_cost: row.total_cost,
+            serial: row.serial,
+            bomstyle: {
+                id: row.bomStyle_id,
+                styleCode: row.styleCode,
+                description: row.description
+            },
+            uom: {
+                id: row.uom_id,
+                baseFabric: row.baseFabric
+            }
+        }));
+
+        res.json(formatted);
+    });
+};
+
 

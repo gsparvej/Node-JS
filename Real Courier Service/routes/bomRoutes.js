@@ -5,6 +5,7 @@ const bomController = require('../controllers/bomController');
 
 
 router.post("/", bomController.saveBOM);
+router.get("/styleCode/:styleCode", bomController.getBOMByStyleCode);
 
 
 
