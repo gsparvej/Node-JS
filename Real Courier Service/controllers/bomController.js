@@ -1,10 +1,23 @@
 const db = require("../db");
 
 exports.saveBOM = (req, res) => {
-    const { serial, material, unit, quantity, unit_price, uom_id, bomstyle_id } = req.body;
+    const { serial, material, unit, quantity, unit_price, uom, bomStyle } = req.body;
+
+
+     // Extract nested IDs correctly
+    const bomstyle_id = bomStyle?.id || null;
+    const uom_id = uom?.id || null;
+
+    if (!bomstyle_id || !uom_id) {
+        return res.status(400).json({ message: 'Missing uom_id or bomstyle_id' });
+    }
+
+
+
 
     const quantityNum = parseFloat(quantity);
     const unitPriceNum = parseFloat(unit_price);
+
 
     const total_cost = quantityNum * unitPriceNum;
 
