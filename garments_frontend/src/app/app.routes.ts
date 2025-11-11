@@ -18,16 +18,22 @@ import { ViewFullOrder } from './component/merchandiser/view-full-order/view-ful
 import { CreateOrder } from './component/merchandiser/create-order/create-order';
 import { AddBom } from './component/merchandiser/add-bom/add-bom';
 import { ViewBom } from './component/merchandiser/view-bom/view-bom';
+import { ViewVendorDetails } from './component/purchase/view-vendor-details/view-vendor-details';
 
 export const routes: Routes = [
     {path: '', component:Home},
+
+    // Purchase part
     {path: 'addItem', component: ItemComponent},
     {path: 'viewItem', component: ViewItemcomponent},
     {path: 'addVendor' , component: VendorComponent},
     {path: 'viewAllVendor' , component: ViewVendor},
+    {path: 'viewVendorDetails/:id', component: ViewVendorDetails},
     {path: 'viewPO', component: ViewHalfPO},
     {path: 'viewPODetails/:id' , component: ViewPODetails},
     {path: 'createPO', component: CreatePO},
+
+    // merchandise part
     {path: 'addBuyer' , component: AddBuyer},
     {path: 'viewAllBuyer' , component: ViewBuyer},
     {path: 'addUom' , component: AddUOM},

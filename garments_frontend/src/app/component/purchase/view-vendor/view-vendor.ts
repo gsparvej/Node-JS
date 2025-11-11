@@ -35,7 +35,7 @@ this.vendor = this.vs.getAllVendor();
 
   }
 
-   getVendorById(id:string): void{
-      this.router.navigate(['/viewVendorPro',id]); 
+   getVendorById(id:number): void{
+      this.router.navigate(['/viewVendorDetails',id]); 
   }
 }

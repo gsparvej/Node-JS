@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class VendorService {
-  
+
   private baseurl = `${environment.apiUrl}`;
 
   constructor(
@@ -23,5 +23,8 @@ export class VendorService {
 
   getAllVendor(): Observable<Vendor[]> {
     return this.http.get<Vendor[]>(this.baseurl + "/api/vendor/");
+  }
+  getVendorById(id: number): Observable<any> {
+    return this.http.get(this.baseurl + "/api/vendor/" + id);
   }
 }
