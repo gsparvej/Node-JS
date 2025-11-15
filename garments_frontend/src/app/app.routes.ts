@@ -19,6 +19,9 @@ import { CreateOrder } from './component/merchandiser/create-order/create-order'
 import { AddBom } from './component/merchandiser/add-bom/add-bom';
 import { ViewBom } from './component/merchandiser/view-bom/view-bom';
 import { ViewVendorDetails } from './component/purchase/view-vendor-details/view-vendor-details';
+import { ViewInventory } from './component/purchase/view-inventory/view-inventory';
+import { StockIn } from './component/purchase/stock-in/stock-in';
+import { StockOut } from './component/purchase/stock-out/stock-out';
 
 export const routes: Routes = [
     {path: '', component:Home},
@@ -32,6 +35,9 @@ export const routes: Routes = [
     {path: 'viewPO', component: ViewHalfPO},
     {path: 'viewPODetails/:id' , component: ViewPODetails},
     {path: 'createPO', component: CreatePO},
+    {path: 'viewInventory' , component: ViewInventory},
+    {path: 'stockIn', component: StockIn},
+    {path: 'stockOut', component: StockOut},
 
     // merchandise part
     {path: 'addBuyer' , component: AddBuyer},
