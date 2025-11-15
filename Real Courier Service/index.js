@@ -17,35 +17,40 @@ const userRoutes = require('./routes/user');
 app.use('/api/users', userRoutes);
 
 
-// item
-app.use("/api/items", require("./routes/itemRoutes"));
 
 
+// Merchandiser Manager Part*********
 
 // vendor
 app.use("/api/vendor" , require("./routes/vendorRoutes"));
 
-// purchase order
-app.use("/api/po", require("./routes/purchaseRoutes"));
-
-
 //BomStyle
 app.use("/api/bomStyle", require("./routes/bomStyleRoutes"));
-
 
 //BOM
 app.use("/api/bom" , require("./routes/bomRoutes"));
 
-
 //UOM
 app.use("/api/uom", require("./routes/uomRoutes"));
-
 
 //Buyer
 app.use("/api/buyer", require("./routes/buyerRoutes"));
 
 // Order
 app.use("/api/order" , require("./routes/orderRoutes"));
+
+
+
+// Purchase Manager Part *******
+
+// purchase order
+app.use("/api/po", require("./routes/purchaseRoutes"));
+
+// item
+app.use("/api/items", require("./routes/itemRoutes"));
+
+// inventory
+app.use("/api/inventory", require("./routes/inventoryRoutes"));
 
 
 

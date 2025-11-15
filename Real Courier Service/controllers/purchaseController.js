@@ -67,6 +67,7 @@ exports.getAllPurchaseOrder = (req, res) => {
       p.id,
       p.po_number,
       p.quantity,
+      p.deliveryDate,
       p.rate,
       p.total,
       p.item_id,
@@ -86,6 +87,7 @@ exports.getAllPurchaseOrder = (req, res) => {
       id: row.id,
       po_number: row.po_number,
       quantity: row.quantity,
+      deliveryDate: row.deliveryDate,
       rate: row.rate,
       total: row.total,
       item: {
