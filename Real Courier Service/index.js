@@ -22,13 +22,13 @@ app.use('/api/users', userRoutes);
 // Merchandiser Manager Part*********
 
 // vendor
-app.use("/api/vendor" , require("./routes/vendorRoutes"));
+app.use("/api/vendor", require("./routes/vendorRoutes"));
 
 //BomStyle
 app.use("/api/bomStyle", require("./routes/bomStyleRoutes"));
 
 //BOM
-app.use("/api/bom" , require("./routes/bomRoutes"));
+app.use("/api/bom", require("./routes/bomRoutes"));
 
 //UOM
 app.use("/api/uom", require("./routes/uomRoutes"));
@@ -37,7 +37,7 @@ app.use("/api/uom", require("./routes/uomRoutes"));
 app.use("/api/buyer", require("./routes/buyerRoutes"));
 
 // Order
-app.use("/api/order" , require("./routes/orderRoutes"));
+app.use("/api/order", require("./routes/orderRoutes"));
 
 
 
@@ -53,6 +53,10 @@ app.use("/api/items", require("./routes/itemRoutes"));
 app.use("/api/inventory", require("./routes/inventoryRoutes"));
 
 
+// Production Manager Part ***********
+
+// production Order
+app.use("/api/productionOrder", require("./routes/productionOrderRoutes"));
 
 
 
@@ -65,8 +69,10 @@ app.use("/api/inventory", require("./routes/inventoryRoutes"));
 
 
 
-app.get('/' , (req, res) =>{
-    res.send('<p> Welcome my Page</p>');
+
+
+app.get('/', (req, res) => {
+  res.send('<p> Welcome my Page</p>');
 })
 
 
